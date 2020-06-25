@@ -1,6 +1,6 @@
 Package: ALK2
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Version: 0.2.0
 Authors@R: 
     person(given = "First",
            family = "Last",
@@ -21,4 +21,8 @@ Suggests:
 Imports: 
     readr,
     dplyr,
-    tidyr
+    tidyr,
+    tibble,
+    assertthat
+Depends: 
+    R (>= 2.10)
