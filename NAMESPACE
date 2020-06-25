@@ -3,3 +3,4 @@
 export(categorize_num)
 export(forward_alk)
 export(reverse_alk)
+export(subsample_data)

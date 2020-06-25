@@ -7,3 +7,31 @@ test_that("categorize_num properly categorize numerical vector", {
                               interval = 0.5),
                c(20, 22.5, 22, 16, 19, 22.5, 23.5))
 })
+
+
+context("subsample_data")
+
+test_that("subsample_data returns lengthy data", {
+  expect_equal(nrow(subsample_data(sampledata)), 2143)
+  expect_equal(nrow(subsample_data(sampledata, sub_prop = 0.5)), 2143)
+})
+
+test_that("subsample Age according to given proportion", {
+
+  expect_equal(
+    subsample_data(sampledata, sub_prop = 0.4) %>%
+      tidyr::drop_na() %>%
+      nrow(),
+    2143 * 0.4,
+    tolerance = 1
+  )
+
+  expect_equal(
+    subsample_data(sampledata, sub_prop = 0.1) %>%
+      tidyr::drop_na() %>%
+      nrow(),
+    2143 * 0.1,
+    tolerance = 1
+  )
+
+})

@@ -21,6 +21,8 @@ Suggests:
 Imports: 
     readr,
     dplyr,
-    tidyr
+    tidyr,
+    tibble,
+    assertthat
 Depends: 
     R (>= 2.10)
