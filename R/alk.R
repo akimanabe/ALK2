@@ -46,3 +46,13 @@ reverse_alk <- function(dat) {
     dplyr::select(Length, Age, n, prop)
 
 }
+
+create_reverse_alk <- function(dat) {
+    dat %>%
+    tidyr::drop_na() %>%
+    reverse_alk()%>%
+    dplyr::select(-n) %>%
+    tidyr::pivot_wider(names_from = Length, values_from = prop)
+}
+
+
