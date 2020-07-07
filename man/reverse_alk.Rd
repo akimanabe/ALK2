@@ -2,7 +2,7 @@
 % Please edit documentation in R/alk.R
 \name{reverse_alk}
 \alias{reverse_alk}
-\title{Create ALK by length}
+\title{Create ALK by age}
 \usage{
 reverse_alk(dat)
 }
@@ -13,7 +13,7 @@ reverse_alk(dat)
 ALK data with n (frequency) and prop (proportion)
 }
 \description{
-Create ALK by length
+Create ALK by age
 }
 \examples{
 \dontrun{

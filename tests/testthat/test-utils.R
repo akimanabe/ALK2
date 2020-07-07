@@ -35,3 +35,21 @@ test_that("subsample Age according to given proportion", {
   )
 
 })
+
+
+context("count_ldata")
+
+test_that("count_ldata properly", {
+  expect_is(count_ldata, "function")
+  expect_error(count_ldata(c(1, 2, 3, 4)))
+
+  count_ldata(tibble::tibble(Length = c(1, 1, 2, 2, 3, 3, 4)))
+
+  expect_equal(
+    count_ldata(tibble::tibble(Length = c(1, 1, 2, 2, 3, 3, 4))),
+    tibble::tibble(Length = c(1, 2, 3, 4),
+                   Frequency = c(2, 2, 2, 1)) %>%
+      dplyr::group_by(Length)
+  )
+
+})
