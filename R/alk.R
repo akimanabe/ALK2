@@ -56,3 +56,21 @@ create_forward_alk <- function(dat) {
 }
 
 
+
+apply_forward_alk <- function(aldata, lengthdata) {
+  assertthat::assert_that(
+    assertthat::are_equal(colnames(aldata), c("Length", "Age"))
+  )
+  assertthat::assert_that(
+    assertthat::are_equal(colnames(lengthdata), c("Length", "Frequency"))
+  )
+
+  aldata %>%
+    tidyr::drop_na() %>%
+    create_forward_alk() %>%
+    tidyr::pivot_longer(cols = c(-Age), names_to = "Length", values_to="Proportion") %>%
+    dplyr::mutate(Length = as.double(Length)) %>%
+    dplyr::inner_join(., lengthdata, by = "Length") %>%
+    dplyr::mutate(Fish = Proportion * Frequency) %>%
+    dplyr::select(Age, Length, Fish)
+}
