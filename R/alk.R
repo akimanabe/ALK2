@@ -60,7 +60,7 @@ forward_alk <- function(dat) {
 create_forward_alk <- function(dat) {
     dat %>%
     tidyr::drop_na() %>%
-    forward_alk()%>%
+    forward_alk() %>%
     dplyr::select(-n) %>%
     tidyr::pivot_wider(names_from = Length, values_from = prop)
 }
@@ -69,8 +69,10 @@ create_forward_alk <- function(dat) {
 
 #' Apply forward alk to length frequency data
 #'
-#' @param aldata tibble with age and length data with colnames = c("Length", "Age")
-#' @param lengthdata tibble with length and frequency data with colnames = c("Length", "Frequency")
+#' @param aldata tibble with age and length data with
+#' colnames = c("Length", "Age")
+#' @param lengthdata tibble with length and frequency data with
+#' colnames = c("Length", "Frequency")
 #'
 #' @return tibble with alk applied to the frequency data
 #' @export
@@ -78,7 +80,7 @@ create_forward_alk <- function(dat) {
 #' @examples
 #' \dontrun{
 #' mydata <- sampledata
-#' mylfreq <- sampledata %>% dplyr::select(Length) %>% count.ldata(.)
+#' mylfreq <- sampledata %>% dplyr::select(Length) %>% count_ldata(.)
 #'
 #' apply_forward_alk(mydata, mylfreq)
 #' }
@@ -93,7 +95,9 @@ apply_forward_alk <- function(aldata, lengthdata) {
   aldata %>%
     tidyr::drop_na() %>%
     create_forward_alk() %>%
-    tidyr::pivot_longer(cols = c(-Age), names_to = "Length", values_to="Proportion") %>%
+    tidyr::pivot_longer(cols = c(-Age),
+                        names_to = "Length",
+                        values_to = "Proportion") %>%
     dplyr::mutate(Length = as.double(Length)) %>%
     dplyr::inner_join(., lengthdata, by = "Length") %>%
     dplyr::mutate(Fish = Proportion * Frequency) %>%

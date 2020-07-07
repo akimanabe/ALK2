@@ -1,7 +1,7 @@
 context("forward alk")
 
 test_that("forward_alk properly consume data.frame", {
-  foo <- tibble::tibble(x = seq(1:10), y = seq(1:10)/10)
+  foo <- tibble::tibble(x = seq(1:10), y = seq(1:10) / 10)
   bar <- foo %>%
     dplyr::mutate(Length = as.factor(x),
                   Age = as.factor(y))
@@ -19,7 +19,7 @@ test_that("forward_alk properly consume data.frame", {
 context("reverse alk")
 
 test_that("reverse properly consume data.frame", {
-  foo <- tibble::tibble(x = seq(1:10), y = seq(1:10)/10)
+  foo <- tibble::tibble(x = seq(1:10), y = seq(1:10) / 10)
   bar <- foo %>%
     dplyr::mutate(Length = as.factor(x),
                   Age = as.factor(y))
@@ -64,7 +64,9 @@ test_that("function creates alk properly", {
 
   expect_equal(
     create_forward_alk(sampledata) %>%
-    tidyr::pivot_longer(cols = (-Age), names_to = "Length", values_to = "Proportion") %>%
+    tidyr::pivot_longer(cols = (-Age),
+                        names_to = "Length",
+                        values_to = "Proportion") %>%
     dplyr::group_by(Length) %>%
     dplyr::summarise(Psum = sum(Proportion, na.rm = TRUE)) %>%
     dplyr::pull(Psum) %>%
@@ -81,7 +83,7 @@ test_that("apply_fowrad_alk functions properly", {
   ldata <-
     sampledata %>%
     dplyr::select(Length) %>%
-    count.ldata()
+    count_ldata()
 
   expect_is(apply_forward_alk(sampledata, ldata), "data.frame")
 

@@ -7,9 +7,11 @@
 apply_forward_alk(aldata, lengthdata)
 }
 \arguments{
-\item{aldata}{tibble with age and length data with colnames = c("Length", "Age")}
+\item{aldata}{tibble with age and length data with
+colnames = c("Length", "Age")}
 
-\item{lengthdata}{tibble with length and frequency data with colnames = c("Length", "Frequency")}
+\item{lengthdata}{tibble with length and frequency data with
+colnames = c("Length", "Frequency")}
 }
 \value{
 tibble with alk applied to the frequency data
@@ -20,7 +22,7 @@ Apply forward alk to length frequency data
 \examples{
 \dontrun{
 mydata <- sampledata
-mylfreq <- sampledata \%>\% dplyr::select(Length) \%>\% count.ldata(.)
+mylfreq <- sampledata \%>\% dplyr::select(Length) \%>\% count_ldata(.)
 
 apply_forward_alk(mydata, mylfreq)
 }

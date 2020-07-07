@@ -3,7 +3,7 @@
 export("%>%")
 export(apply_forward_alk)
 export(categorize_num)
-export(count.ldata)
+export(count_ldata)
 export(create_forward_alk)
 export(reverse_alk)
 export(subsample_data)

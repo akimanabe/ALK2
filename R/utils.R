@@ -58,9 +58,9 @@ subsample_data <-
 #' @examples
 #' \dontrun{
 #' ldata <- tibble::tibble(Length = round(runif(1000, 5, 40)))
-#' count.ldata(ldata)
+#' count_ldata(ldata)
 #' }
-count.ldata <- function(dat) {
+count_ldata <- function(dat) {
   dat %>%
     dplyr::group_by(Length) %>%
     dplyr::count(Length) %>%
