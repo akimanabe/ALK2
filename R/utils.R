@@ -47,3 +47,22 @@ subsample_data <-
       dplyr::select(-rownum) %>%
       dplyr::arrange(Age, Length)
   }
+
+#' Create length frequency data
+#'
+#' @param dat single strand vector with length data
+#'
+#' @return length frequency
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' ldata <- tibble::tibble(Length = round(runif(1000, 5, 40)))
+#' count.ldata(ldata)
+#' }
+count.ldata <- function(dat) {
+  dat %>%
+    dplyr::group_by(Length) %>%
+    dplyr::count(Length) %>%
+    dplyr::rename(Frequency = n)
+}
