@@ -7,9 +7,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' forrward_alk(sampledata)
+#' reverse_alk(sampledata)
 #' }
-forward_alk <- function(dat) {
+reverse_alk <- function(dat) {
 
   assertthat::assert_that(
     assertthat::are_equal(colnames(dat), c("Length", "Age"))
@@ -30,9 +30,9 @@ forward_alk <- function(dat) {
 #'
 #' @examples
 #' \dontrun{
-#' reverse_alk(sampledata)
+#' forward_alk(sampledata)
 #' }
-reverse_alk <- function(dat) {
+forward_alk <- function(dat) {
 
   assertthat::assert_that(
     assertthat::are_equal(colnames(dat), c("Length", "Age"))
@@ -47,10 +47,10 @@ reverse_alk <- function(dat) {
 
 }
 
-create_reverse_alk <- function(dat) {
+create_forward_alk <- function(dat) {
     dat %>%
     tidyr::drop_na() %>%
-    reverse_alk()%>%
+    forward_alk()%>%
     dplyr::select(-n) %>%
     tidyr::pivot_wider(names_from = Length, values_from = prop)
 }

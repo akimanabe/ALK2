@@ -26,7 +26,7 @@ lcount <-
 alkey <-
 aged %>%
   dplyr::select(Length, Age) %>%
-  create_reverse_alk() %>%
+  create_forward_alk() %>%
   tidyr::pivot_longer(cols = c(-Age), names_to = "Length", values_to="prop") %>%
   dplyr::mutate(Length = as.double(Length)) %>%
   dplyr::inner_join(., lcount, by = "Length") %>%
