@@ -26,7 +26,6 @@ reverse_alk <- function(dat) {
 #' @param dat tibble with two columns with colnames = c("Length", "Age")
 #'
 #' @return ALK data with n (frequency) and prop (proportion)
-#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -47,6 +46,17 @@ forward_alk <- function(dat) {
 
 }
 
+#' Create forward alk
+#'
+#' @param dat tibble with two columns with colnames = c("Length", "Age")
+#'
+#' @return ALK data with n (frequency) and prop (proportion)
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' create_forward_alk(sampledata)
+#' }
 create_forward_alk <- function(dat) {
     dat %>%
     tidyr::drop_na() %>%
@@ -57,6 +67,21 @@ create_forward_alk <- function(dat) {
 
 
 
+#' Apply forward alk to length frequency data
+#'
+#' @param aldata tibble with age and length data with colnames = c("Length", "Age")
+#' @param lengthdata tibble with length and frequency data with colnames = c("Length", "Frequency")
+#'
+#' @return tibble with alk applied to the frequency data
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' mydata <- sampledata
+#' mylfreq <- sampledata %>% dplyr::select(Length) %>% count.ldata(.)
+#'
+#' apply_forward_alk(mydata, mylfreq)
+#' }
 apply_forward_alk <- function(aldata, lengthdata) {
   assertthat::assert_that(
     assertthat::are_equal(colnames(aldata), c("Length", "Age"))
