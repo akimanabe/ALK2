@@ -33,3 +33,41 @@ test_that("reverse properly consume data.frame", {
   expect_gte(reverse_alk(sampledata) %>%
                ncol(), 4)
 })
+
+context("create_forward_alk")
+
+test_that("function creates alk properly", {
+  expect_is(create_forward_alk(sampledata),
+            "data.frame")
+
+  expect_error(
+  sampledata %>%
+    dplyr::rename(age = Age,
+                  len = Length) %>%
+    create_forward_alk()
+  )
+
+  expect_equal(
+    create_forward_alk(sampledata) %>%
+      colnames(.) %>%
+      .[1], "Age"
+  )
+
+  expect_true(
+    create_forward_alk(sampledata) %>%
+      colnames(.) %>%
+      .[-1] %>%
+      as.character() %>%
+      stringr::str_detect(., "\\d") %>%
+      unique()
+    )
+
+  expect_equal(
+    create_forward_alk(sampledata) %>%
+    tidyr::pivot_longer(cols = (-Age), names_to = "Length", values_to = "Proportion") %>%
+    dplyr::group_by(Length) %>%
+    dplyr::summarise(Psum = sum(Proportion, na.rm = TRUE)) %>%
+    dplyr::pull(Psum) %>%
+      unique(), 1)
+
+})
