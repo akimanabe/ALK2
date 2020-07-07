@@ -12,5 +12,6 @@ generate.alsample <- function(dat = sampledata){
 count.ldata <- function(dat) {
   dat %>%
     dplyr::group_by(Length) %>%
-    dplyr::count(Length)
+    dplyr::count(Length) %>%
+    dplyr::rename(Frequency = n)
 }
