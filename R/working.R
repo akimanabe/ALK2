@@ -1,5 +1,6 @@
 # Working file
-
+foo <-
+function(){
 sdata <- sampledata %>%
   dplyr::mutate(num = seq(1, nrow(.)))
 
@@ -33,3 +34,4 @@ aged %>%
   dplyr::mutate(fnumber = prop * Frequency) %>%
   dplyr::select(Age, Length, fnumber) %>%
   tidyr::pivot_wider(names_from = "Length", values_from = "fnumber")
+}
