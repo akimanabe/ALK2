@@ -71,3 +71,30 @@ test_that("function creates alk properly", {
       unique(), 1)
 
 })
+
+context("apply_forward_alk")
+
+test_that("apply_fowrad_alk functions properly", {
+
+  expect_is(apply_forward_alk, "function")
+
+  ldata <-
+    sampledata %>%
+    dplyr::select(Length) %>%
+    count.ldata()
+
+  expect_is(apply_forward_alk(sampledata, ldata), "data.frame")
+
+  expect_equal(
+  apply_forward_alk(sampledata, ldata) %>%
+    dplyr::group_by(Age) %>%
+    dplyr::summarise(Fishsum = sum(Fish, na.rm = T)) %>%
+    dplyr::pull(Fishsum),
+
+  sampledata %>%
+    dplyr::select(Age) %>%
+    dplyr::count(Age) %>%
+    dplyr::pull(n)
+  )
+
+})
