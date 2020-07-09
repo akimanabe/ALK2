@@ -65,7 +65,24 @@ create_forward_alk <- function(dat) {
     tidyr::pivot_wider(names_from = Length, values_from = prop)
 }
 
-
+#' Create reverse alk
+#'
+#' @param dat tibble with two columns with colnames = c("Length", "Age")
+#'
+#' @return ALK data with n (frequency) and prop (proportion)
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' create_reverse_alk(sampledata)
+#' }
+create_reverse_alk <- function(dat) {
+  dat %>%
+    tidyr::drop_na() %>%
+    reverse_alk() %>%
+    dplyr::select(-n) %>%
+    tidyr::pivot_wider(names_from = Length, values_from = prop)
+}
 
 #' Apply forward alk to length frequency data
 #'
