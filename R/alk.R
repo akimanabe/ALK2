@@ -120,3 +120,40 @@ apply_forward_alk <- function(aldata, lengthdata) {
     dplyr::mutate(Fish = Proportion * Frequency) %>%
     dplyr::select(Age, Length, Fish)
 }
+
+#' Apply reverse alk to length frequency data
+#'
+#' @param aldata tibble with age and length data with
+#' colnames = c("Length", "Age")
+#' @param lengthdata tibble with length and frequency data with
+#' colnames = c("Length", "Frequency")
+#'
+#' @return tibble with alk applied to the frequency data
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' mydata <- sampledata
+#' mylfreq <- sampledata %>% dplyr::select(Length) %>% count_ldata(.)
+#'
+#' apply_reverse_alk(mydata, mylfreq)
+#' }
+apply_reverse_alk <- function(aldata, lengthdata) {
+  assertthat::assert_that(
+    assertthat::are_equal(colnames(aldata), c("Length", "Age"))
+  )
+  assertthat::assert_that(
+    assertthat::are_equal(colnames(lengthdata), c("Length", "Frequency"))
+  )
+
+  sampledata %>%
+    tidyr::drop_na() %>%
+    create_reverse_alk() %>%
+    tidyr::pivot_longer(cols = c(-Age),
+                        names_to = "Length",
+                        values_to = "Proportion") %>%
+    dplyr::mutate(Length = as.double(Length)) %>%
+    dplyr::inner_join(., lengthdata, by = "Length") %>%
+    dplyr::mutate(Fish = Proportion * Frequency) %>%
+    dplyr::select(Age, Length, Fish)
+}
