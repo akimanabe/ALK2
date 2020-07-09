@@ -141,3 +141,26 @@ test_that("apply_fowrad_alk functions properly", {
   )
 
 })
+
+context("apply_reverse_alk")
+
+test_that("reverse alk is applied proplery", {
+  expect_is(apply_reverse_alk, "function")
+
+  ldata <-
+    sampledata %>%
+    dplyr::select(Length) %>%
+    count_ldata()
+
+  expect_equal(
+    apply_reverse_alk(sampledata, ldata) %>%
+      dplyr::group_by(Age) %>%
+      dplyr::summarise(Fishsum = sum(Fish, na.rm = T)) %>%
+      dplyr::pull(Fishsum),
+
+    sampledata %>%
+      dplyr::select(Age) %>%
+      dplyr::count(Age) %>%
+      dplyr::pull(n)
+  )
+})
