@@ -4,12 +4,13 @@
 \alias{limit_length_bin}
 \title{Limit length bin by applying plus and minus group}
 \usage{
-limit_length_bin(Length, limit_length = c(NA, NA))
+limit_length_bin(length, limit_length = c(NA, NA))
 }
 \arguments{
-\item{Length}{Length frequency data}
+\item{length}{Length frequency data}
 
-\item{limit_length}{Limit of minus and plus group given as \code{c(lower_limit, upper_limit)}
+\item{limit_length}{Limit of minus and plus group
+given as \code{c(lower_limit, upper_limit)}
 \describe{
 \item{lower_limit}{lower limit of length bin}
 \item{upper_limit}{upper limit of length bin}
