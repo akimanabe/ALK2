@@ -1,6 +1,6 @@
 #' Limit length bin by applying plus and minus group
 #'
-#' @param length Length frequency data
+#' @param length_data Length frequency data
 #' @param limit_length Limit of minus and plus group
 #' given as \code{c(lower_limit, upper_limit)}
 #'  \describe{
@@ -13,8 +13,8 @@
 #' limit_length_bin(Length = freq_sample, limit_length = c(10, 30))
 #' }
 limit_length_bin <- # nolint
-  function(length, limit_length = c(NA, NA)) {
-    Length %>%
+  function(length_data, limit_length = c(NA, NA)) {
+    length_data %>%
       dplyr::arrange(Length) %>%
       dplyr::mutate(Length = dplyr::if_else(Length < limit_length[1],
                                             limit_length[1], Length),
