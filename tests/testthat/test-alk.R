@@ -16,21 +16,21 @@ test_that("forward_alk properly consume data.frame", {
                ncol(), 4)
 })
 
-context("reverse alk")
+context("inverse alk")
 
-test_that("reverse properly consume data.frame", {
+test_that("inverse properly consume data.frame", {
   foo <- tibble::tibble(x = seq(1:10), y = seq(1:10) / 10)
   bar <- foo %>%
     dplyr::mutate(Length = as.factor(x),
                   Age = as.factor(y))
 
-  expect_error(reverse_alk(foo))
-  expect_error(reverse_alk(bar))
+  expect_error(inverse_alk(foo))
+  expect_error(inverse_alk(bar))
 
-  expect_is(reverse_alk(sampledata), "data.frame")
-  expect_gte(reverse_alk(sampledata) %>%
+  expect_is(inverse_alk(sampledata), "data.frame")
+  expect_gte(inverse_alk(sampledata) %>%
                nrow(), 1)
-  expect_gte(reverse_alk(sampledata) %>%
+  expect_gte(inverse_alk(sampledata) %>%
                ncol(), 4)
 })
 
@@ -74,28 +74,28 @@ test_that("function creates alk properly", {
 
 })
 
-context("create_reverse_alk")
+context("create_inverse_alk")
 
-test_that("function creates reverse alk properly", {
-  expect_is(create_reverse_alk, "function")
-  expect_is(create_reverse_alk(sampledata),
+test_that("function creates inverse alk properly", {
+  expect_is(create_inverse_alk, "function")
+  expect_is(create_inverse_alk(sampledata),
             "data.frame")
 
   expect_error(
     sampledata %>%
       dplyr::rename(age = Age,
                     len = Length) %>%
-      create_reverse_alk()
+      create_inverse_alk()
   )
 
   expect_equal(
-    create_reverse_alk(sampledata) %>%
+    create_inverse_alk(sampledata) %>%
       colnames(.) %>%
       .[1], "Age"
   )
 
   expect_true(
-    create_reverse_alk(sampledata) %>%
+    create_inverse_alk(sampledata) %>%
       colnames(.) %>%
       .[-1] %>%
       as.character() %>%
@@ -104,7 +104,7 @@ test_that("function creates reverse alk properly", {
   )
 
   expect_equal(
-    create_reverse_alk(sampledata) %>%
+    create_inverse_alk(sampledata) %>%
       tidyr::pivot_longer(cols = (-Age),
                           names_to = "Length",
                           values_to = "Proportion") %>%

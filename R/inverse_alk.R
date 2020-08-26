@@ -7,9 +7,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' reverse_alk(sampledata)
+#' inverse_alk(sampledata)
 #' }
-reverse_alk <- function(dat) {
+inverse_alk <- function(dat) {
 
   assertthat::assert_that(
     assertthat::are_equal(colnames(dat), c("Length", "Age"))
@@ -21,7 +21,7 @@ reverse_alk <- function(dat) {
     dplyr::mutate(prop = prop.table(n))
 }
 
-#' Create reverse alk
+#' Create inverse alk
 #'
 #' @param dat tibble with two columns with colnames = c("Length", "Age")
 #'
@@ -30,12 +30,12 @@ reverse_alk <- function(dat) {
 #'
 #' @examples
 #' \dontrun{
-#' create_reverse_alk(sampledata)
+#' create_inverse_alk(sampledata)
 #' }
-create_reverse_alk <- function(dat) {
+create_inverse_alk <- function(dat) {
   dat %>%
     tidyr::drop_na() %>%
-    reverse_alk() %>%
+    inverse_alk() %>%
     dplyr::select(-n) %>%
     tidyr::pivot_wider(names_from = Length, values_from = prop)
 }
