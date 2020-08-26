@@ -8,7 +8,7 @@ test_that("function limits numbers properly", {
   expect_equal(limit_length_bin(freq_sample, c(10, 30)) %>%
                  dplyr::group_by(Length) %>%
                  dplyr::summarise() %>%
-                 pull() %>%
+                 dplyr::pull() %>%
                  min(),
                10
                  )
@@ -16,7 +16,7 @@ test_that("function limits numbers properly", {
   expect_equal(limit_length_bin(freq_sample, c(10, 30)) %>%
                  dplyr::group_by(Length) %>%
                  dplyr::summarise() %>%
-                 pull() %>%
+                 dplyr::pull() %>%
                  max(),
                30
   )
