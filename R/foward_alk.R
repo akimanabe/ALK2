@@ -3,7 +3,7 @@
 #' @param dat tibble with two columns with colnames = c("Length", "Age")
 #'
 #' @return ALK data with n (frequency) and prop (proportion)
-#'
+#' @export
 #' @examples
 #' \dontrun{
 #' forward_alk(sampledata)
