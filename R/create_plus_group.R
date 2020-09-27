@@ -9,6 +9,6 @@ create_plus_group <-
       dplyr::mutate(age = dplyr::if_else(age > plus_group, plus_group, age))
   }
 
-al_sample %>%
-  dplyr::select(Age) %>%
-  create_plus_group(., 5)
+# al_sample %>%
+#   dplyr::select(Age) %>%
+#   create_plus_group(., 5)
